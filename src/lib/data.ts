@@ -1,5 +1,10 @@
 // ============================================================
 // Portfolio Data — Kanishk Karam
+// Premium Redesign — Enriched Data
+// ============================================================
+
+// ============================================================
+// INTERFACES
 // ============================================================
 
 export interface FeaturedProject {
@@ -10,6 +15,9 @@ export interface FeaturedProject {
   github?: string;
   liveDemo?: string;
   image: string;
+  metrics?: string;
+  featured?: boolean;
+  gradient: string; // CSS gradient for card background
 }
 
 export interface UniverseProject {
@@ -29,7 +37,9 @@ export interface Skill {
 export interface SkillCategory {
   title: string;
   icon: string;
+  description: string;
   skills: Skill[];
+  relatedProjects: string[];
 }
 
 export interface Education {
@@ -46,13 +56,17 @@ export interface Certification {
   title: string;
   issuer: string;
   year: string;
-  badge?: string;
+  badge: string;
+  verificationUrl?: string;
+  description?: string;
 }
 
 export interface Achievement {
   title: string;
   description: string;
   icon: string;
+  year: string;
+  impact?: string;
 }
 
 export interface TimelineMilestone {
@@ -68,6 +82,8 @@ export interface TimelineMilestone {
 
 export const heroData = {
   name: 'KANISHK KARAM',
+  firstName: 'KANISHK',
+  lastName: 'KARAM',
   roles: [
     'AI Engineer',
     'Data Science Student',
@@ -75,10 +91,15 @@ export const heroData = {
     'Full Stack Builder',
   ],
   tagline: 'Building intelligent systems that see, learn, and create.',
+  stats: [
+    { value: '20+', label: 'Projects' },
+    { value: '5+', label: 'AI Solutions' },
+    { value: '10+', label: 'Tech Stacks' },
+  ],
   cta: {
     projects: 'Explore Projects',
     resume: 'Download Resume',
-    contact: 'Contact Me',
+    contact: 'Get in Touch',
   },
   resumeUrl: '/resume.pdf',
 };
@@ -146,6 +167,9 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/smart-board.webp',
+    metrics: 'Multi-screen • Real-time',
+    featured: true,
+    gradient: 'linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08))',
   },
   {
     id: 'purecious-ai',
@@ -156,6 +180,9 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/purecious-ai.webp',
+    metrics: 'RAG Pipeline • LLM',
+    featured: true,
+    gradient: 'linear-gradient(135deg, rgba(209,0,31,0.08), rgba(239,68,68,0.06))',
   },
   {
     id: 'mental-health',
@@ -166,6 +193,8 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/mental-health.webp',
+    metrics: 'NLP • Sentiment Analysis',
+    gradient: 'linear-gradient(135deg, rgba(16,185,129,0.08), rgba(6,182,212,0.06))',
   },
   {
     id: 'samarth-ai',
@@ -176,6 +205,8 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/samarth-ai.webp',
+    metrics: 'Accessibility • NLQ',
+    gradient: 'linear-gradient(135deg, rgba(245,158,11,0.08), rgba(249,115,22,0.06))',
   },
   {
     id: 'shivoham-crane',
@@ -186,6 +217,8 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/shivoham-crane.webp',
+    metrics: 'Full Stack • Production',
+    gradient: 'linear-gradient(135deg, rgba(99,102,241,0.08), rgba(168,85,247,0.06))',
   },
   {
     id: 'air-canvas',
@@ -196,32 +229,34 @@ export const featuredProjects: FeaturedProject[] = [
     github: 'https://github.com/kanishkkaram',
     liveDemo: '#',
     image: '/images/projects/air-canvas.webp',
+    metrics: 'Real-time CV • Gesture',
+    gradient: 'linear-gradient(135deg, rgba(236,72,153,0.08), rgba(244,114,182,0.06))',
   },
 ];
 
 // ============================================================
-// PROJECT UNIVERSE (3D Galaxy)
+// PROJECT UNIVERSE
 // ============================================================
 
 export const universeProjects: UniverseProject[] = [
   {
     id: 'drowsiness',
     title: 'Driver Drowsiness Detection',
-    description: 'Real-time drowsiness detection system using facial landmark analysis and eye aspect ratio monitoring to alert drivers.',
+    description: 'Real-time drowsiness detection system using facial landmark analysis and eye aspect ratio monitoring.',
     category: 'cv',
     techStack: ['Python', 'OpenCV', 'dlib', 'CNN'],
   },
   {
     id: 'emotion',
     title: 'Emotion Detection',
-    description: 'Deep learning model that classifies facial expressions into distinct emotional states in real-time video streams.',
+    description: 'Deep learning model that classifies facial expressions into distinct emotional states in real-time.',
     category: 'cv',
     techStack: ['Python', 'TensorFlow', 'OpenCV', 'CNN'],
   },
   {
     id: 'senior-citizen',
     title: 'Senior Citizen Identification',
-    description: 'Computer vision system for identifying and prioritizing senior citizens in public spaces using age estimation models.',
+    description: 'Computer vision system for identifying and prioritizing senior citizens using age estimation models.',
     category: 'cv',
     techStack: ['Python', 'OpenCV', 'Deep Learning'],
   },
@@ -242,56 +277,56 @@ export const universeProjects: UniverseProject[] = [
   {
     id: 'car-color',
     title: 'Car Color Detection',
-    description: 'Automated vehicle color classification system using image processing and machine learning techniques.',
+    description: 'Automated vehicle color classification system using image processing and ML techniques.',
     category: 'cv',
     techStack: ['Python', 'OpenCV', 'Scikit-learn'],
   },
   {
     id: 'credit-fraud',
     title: 'Credit Card Fraud Detection',
-    description: 'Machine learning pipeline for detecting fraudulent credit card transactions using anomaly detection algorithms.',
+    description: 'ML pipeline for detecting fraudulent credit card transactions using anomaly detection.',
     category: 'ml',
     techStack: ['Python', 'Scikit-learn', 'Pandas', 'XGBoost'],
   },
   {
     id: 'personality',
     title: 'Customer Personality Analysis',
-    description: 'Clustering and segmentation analysis of customer behavior patterns for targeted marketing strategies.',
+    description: 'Clustering and segmentation analysis of customer behavior for targeted marketing.',
     category: 'data',
     techStack: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib'],
   },
   {
     id: 'churn',
     title: 'Customer Churn Prediction',
-    description: 'Predictive model to identify customers likely to churn, enabling proactive retention strategies.',
+    description: 'Predictive model to identify customers likely to churn for proactive retention.',
     category: 'ml',
     techStack: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas'],
   },
   {
     id: 'car-price',
     title: 'Car Price Prediction',
-    description: 'Regression model for predicting used car prices based on multiple features including mileage, brand, and condition.',
+    description: 'Regression model for predicting used car prices based on multiple features.',
     category: 'ml',
     techStack: ['Python', 'Scikit-learn', 'Pandas', 'Flask'],
   },
   {
     id: 'housing',
     title: 'Housing Price Prediction',
-    description: 'Advanced regression analysis for real estate price prediction using ensemble methods and feature engineering.',
+    description: 'Advanced regression for real estate price prediction using ensemble methods.',
     category: 'ml',
     techStack: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas'],
   },
   {
     id: 'titanic',
     title: 'Titanic Survival Prediction',
-    description: 'Classic ML classification problem — predicting passenger survival on the Titanic using logistic regression and random forests.',
+    description: 'Classic ML classification — predicting passenger survival using logistic regression.',
     category: 'ml',
     techStack: ['Python', 'Scikit-learn', 'Pandas'],
   },
   {
     id: 'wine',
     title: 'Red Wine Quality Prediction',
-    description: 'Quality classification model for red wine using physicochemical properties and ensemble learning methods.',
+    description: 'Quality classification for red wine using physicochemical properties and ensemble learning.',
     category: 'data',
     techStack: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib'],
   },
@@ -305,15 +340,18 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     icon: '💻',
+    description: 'Core programming languages for building systems and analyzing data.',
     skills: [
       { name: 'Python', level: 95 },
       { name: 'SQL', level: 85 },
       { name: 'Java', level: 70 },
     ],
+    relatedProjects: ['Purecious-AI', 'Air Canvas', 'Mental Health Chatbot'],
   },
   {
     title: 'AI & ML',
     icon: '🧠',
+    description: 'Machine learning frameworks and tools for building intelligent models.',
     skills: [
       { name: 'TensorFlow', level: 90 },
       { name: 'Scikit-learn', level: 90 },
@@ -322,43 +360,52 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Sentence Transformers', level: 80 },
       { name: 'Ollama', level: 75 },
     ],
+    relatedProjects: ['Purecious-AI', 'Samarth AI', 'Plant Disease Detection'],
   },
   {
     title: 'Computer Vision',
     icon: '👁️',
+    description: 'Libraries and architectures for visual intelligence and image understanding.',
     skills: [
       { name: 'OpenCV', level: 92 },
       { name: 'MediaPipe', level: 85 },
       { name: 'CNN', level: 88 },
     ],
+    relatedProjects: ['Air Canvas', 'Drowsiness Detection', 'Emotion Detection'],
   },
   {
     title: 'Web',
     icon: '🌐',
+    description: 'Full-stack web technologies for building production applications.',
     skills: [
       { name: 'React', level: 88 },
       { name: 'Next.js', level: 85 },
       { name: 'Flask', level: 82 },
       { name: 'Express', level: 78 },
     ],
+    relatedProjects: ['Smart Board', 'Shivoham Crane', 'Samarth AI'],
   },
   {
     title: 'Database',
     icon: '🗄️',
+    description: 'Database systems for persistent data storage and efficient querying.',
     skills: [
       { name: 'MySQL', level: 85 },
       { name: 'PostgreSQL', level: 80 },
     ],
+    relatedProjects: ['Smart Board', 'Shivoham Crane'],
   },
   {
     title: 'Tools',
     icon: '🔧',
+    description: 'Development tools and DevOps utilities for professional workflows.',
     skills: [
       { name: 'Git', level: 90 },
       { name: 'GitHub', level: 92 },
       { name: 'Docker', level: 75 },
       { name: 'Prisma', level: 80 },
     ],
+    relatedProjects: ['All Projects'],
   },
 ];
 
@@ -402,24 +449,28 @@ export const certifications: Certification[] = [
     issuer: 'Coursera',
     year: '2025',
     badge: '🏅',
+    description: 'Professional certificate covering advanced data analytics, statistical analysis, and machine learning with Python.',
   },
   {
     title: 'GenAI-Powered Data Analytics',
     issuer: 'Forage',
     year: '2025',
     badge: '🏅',
+    description: 'Virtual experience program on applying generative AI to data analytics workflows.',
   },
   {
     title: 'Artificial Intelligence & Machine Learning',
     issuer: 'ISRO',
     year: '2024',
     badge: '🏅',
+    description: 'Certification in AI/ML fundamentals from the Indian Space Research Organisation.',
   },
   {
     title: 'Cloud Computing Certification',
     issuer: 'University',
     year: '2024',
     badge: '🏅',
+    description: 'Academic certification in cloud computing concepts, services, and deployment strategies.',
   },
 ];
 
@@ -433,24 +484,32 @@ export const achievements: Achievement[] = [
     description:
       'Competed against top teams and reached the finals with an innovative data-driven solution.',
     icon: '🏆',
+    year: '2024',
+    impact: 'Top 10 Finalist',
   },
   {
     title: 'Multiple Analytics Workshops',
     description:
       'Participated in industry-leading analytics workshops to sharpen data science skills.',
     icon: '📊',
+    year: '2024',
+    impact: '5+ Workshops',
   },
   {
     title: 'Industry Workshop Participant',
     description:
       'Engaged with industry experts in hands-on workshops covering cutting-edge technologies.',
     icon: '🎯',
+    year: '2023',
+    impact: 'Hands-on Experience',
   },
   {
     title: 'Academic & Applied Data Analysis Projects',
     description:
       'Delivered multiple high-impact academic and applied data analysis projects with real-world datasets.',
     icon: '🔬',
+    year: '2023',
+    impact: '10+ Projects',
   },
 ];
 
@@ -459,10 +518,13 @@ export const achievements: Achievement[] = [
 // ============================================================
 
 export const contactData = {
-  email: 'kanishkkaram@gmail.com',
-  linkedin: 'https://linkedin.com/in/kanishkkaram',
-  github: 'https://github.com/kanishkkaram',
+  email: 'kanishk.karam.28@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/kanishk-karam/',
+  github: 'https://github.com/Kanishkkaram2703',
   resumeUrl: '/resume.pdf',
+  location: 'Mumbai, India',
+  availability: 'Open to Opportunities',
+  responseTime: '< 24 hours',
 };
 
 // ============================================================
@@ -471,7 +533,6 @@ export const contactData = {
 
 export const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Education', href: '#education' },
