@@ -148,16 +148,27 @@ function GalaxyScene({ onSelect }: { onSelect: (p: UniverseProject) => void }) {
         {/* Connection lines */}
         {positions.map((pos, i) => {
           const nextPos = positions[(i + 1) % positions.length];
-          const lineGeo = new THREE.BufferGeometry().setFromPoints([
-            new THREE.Vector3(...pos),
-            new THREE.Vector3(...nextPos),
-          ]);
-          return (
-            <line key={`line-${i}`} geometry={lineGeo}>
-              <lineBasicMaterial color="#FF2A2A" transparent opacity={0.08} />
-            </line>
+          const lineGeo = useMemo(
+            () =>
+              new THREE.BufferGeometry().setFromPoints([
+               new THREE.Vector3(...pos),
+               new THREE.Vector3(...nextPos),
+                ]),
+            [pos, nextPos]
           );
-        })}
+          return (
+            <primitive
+              key={`line-${i}`}
+              object={new THREE.Line(
+                lineGeo,
+                new THREE.LineBasicMaterial({
+                  color: "#FF2A2A",
+                  transparent: true,
+                  opacity: 0.08,
+                 })
+              })
+            />  
+          );
 
         {universeProjects.map((project, i) => (
           <ProjectNode
