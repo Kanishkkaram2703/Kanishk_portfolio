@@ -1,29 +1,29 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Lenis from 'lenis';
 
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<ReturnType<typeof import('lenis')['default']> extends new (...args: unknown[]) => infer R ? R : never>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
     // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    let lenis: InstanceType<typeof import('lenis')['default']> | null = null;
+    let lenis: Lenis | null = null;
     let raf: number;
 
     const init = async () => {
-      const Lenis = (await import('lenis')).default;
-      lenis = new Lenis({
+      const LenisClass = (await import('lenis')).default;
+      lenis = new LenisClass({
         duration: 1.2,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         touchMultiplier: 2,
         infinite: false,
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (lenisRef as any).current = lenis;
+      lenisRef.current = lenis;
 
       const animate = (time: number) => {
         lenis?.raf(time);
