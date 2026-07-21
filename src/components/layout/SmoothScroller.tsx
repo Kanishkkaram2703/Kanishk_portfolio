@@ -4,14 +4,14 @@ import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 
 export default function SmoothScroller({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
+  const lenisRef = useRef<any>(null);
 
   useEffect(() => {
     // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    let lenis: Lenis | null = null;
+    let lenis: any = null;
     let raf: number;
 
     const init = async () => {
