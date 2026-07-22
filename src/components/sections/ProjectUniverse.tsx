@@ -145,7 +145,7 @@ function GalaxyScene({ onSelect }: { onSelect: (p: UniverseProject) => void }) {
 
       <GalaxyRotation>
         {/* Connection lines */}
-        {positions.map((pos, i) => {
+        {/*{positions.map((pos, i) => {
           const nextPos = positions[(i + 1) % positions.length];
           const lineGeo = new THREE.BufferGeometry().setFromPoints([
             new THREE.Vector3(...pos),
@@ -156,7 +156,7 @@ function GalaxyScene({ onSelect }: { onSelect: (p: UniverseProject) => void }) {
               <lineBasicMaterial color="#FF2A2A" transparent opacity={0.08} />
             </line>
           );
-        })}
+        })}*/}
 
         {universeProjects.map((project, i) => (
           <ProjectNode
